@@ -53,7 +53,7 @@
                 </div>
                 
                 <div class="buttons">
-                    <div></div> <!-- Empty div to maintain spacing with flexbox -->
+                    <button id="leave-test-btn" class="leave-btn">Leave Test</button>
                     <button id="next-btn" class="next-btn">Next</button>
                     <button id="finish-btn" class="finish-btn hidden">Finish</button>
                 </div>
@@ -78,6 +78,18 @@
                         <button id="start-over-btn" class="next-btn">Start New Session</button>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for confirmation -->
+    <div id="leave-confirm-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Leave the test?</h3>
+            <p>Your progress will be saved, and you can continue later. Are you sure you want to leave?</p>
+            <div class="modal-buttons">
+                <button id="cancel-leave-btn" class="secondary-btn">Cancel</button>
+                <button id="confirm-leave-btn" class="warning-btn">Yes, Leave Test</button>
             </div>
         </div>
     </div>

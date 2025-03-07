@@ -136,6 +136,12 @@ const startOverBtn = document.getElementById('start-over-btn');
 const timerEl = document.getElementById('timer');
 const ksbListEl = document.getElementById('ksb-list');
 
+// Additional DOM elements
+const leaveTestBtn = document.getElementById('leave-test-btn');
+const leaveConfirmModal = document.getElementById('leave-confirm-modal');
+const cancelLeaveBtn = document.getElementById('cancel-leave-btn');
+const confirmLeaveBtn = document.getElementById('confirm-leave-btn');
+
 // Initialize the app
 function init() {
     // Check if interview was in progress
@@ -174,6 +180,11 @@ function init() {
     nextBtn.addEventListener('click', goToNextQuestion);
     finishBtn.addEventListener('click', finishInterview);
     startOverBtn.addEventListener('click', startOver);
+    
+    // Add new event listeners for leaving the test
+    leaveTestBtn.addEventListener('click', showLeaveConfirmation);
+    cancelLeaveBtn.addEventListener('click', hideLeaveConfirmation);
+    confirmLeaveBtn.addEventListener('click', leaveTest);
     
     // Generate KSB list for the side navigation
     generateKsbList();
@@ -390,6 +401,34 @@ function startTimer() {
         
         timerEl.textContent = `${minutes}:${seconds}`;
     }, 1000);
+}
+
+// Show leave confirmation modal
+function showLeaveConfirmation() {
+    saveCurrentAnswer(); // Save the current answer before potentially leaving
+    leaveConfirmModal.classList.remove('hidden');
+}
+
+// Hide leave confirmation modal
+function hideLeaveConfirmation() {
+    leaveConfirmModal.classList.add('hidden');
+}
+
+// Leave the test and return to main page
+function leaveTest() {
+    hideLeaveConfirmation();
+    
+    // Clear the timer interval
+    clearInterval(timerInterval);
+    
+    // Hide interview section
+    interviewSection.classList.add('hidden');
+    
+    // Show start screen
+    startScreen.classList.remove('hidden');
+    
+    // Save progress so user can continue later
+    saveToLocalStorage();
 }
 
 // Save to localStorage
