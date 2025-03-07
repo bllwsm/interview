@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Interview Preparation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Portfolio Interview Preparation</h1>
+            <p>Practice answering interview questions to prepare for your portfolio discussion</p>
+        </header>
+        
+        <!-- New Start Screen -->
+        <div id="start-screen" class="card start-screen fade-in">
+            <h2>Welcome to Your Interview Practice Session</h2>
+            <p>This tool will help you prepare for your portfolio discussion by presenting various interview questions related to different Knowledge, Skills and Behaviors (KSBs) required for the assessment.</p>
+            
+            <div class="intro-points">
+                <h3>Before you begin:</h3>
+                <ul>
+                    <li>You will be presented with questions one at a time</li>
+                    <li>Take your time to provide thoughtful answers</li>
+                    <li>Once you move to the next question, you cannot go back</li>
+                    <li>At the end, you'll be able to review all your answers</li>
+                    <li>You can use the personal notes section for reminders that won't be part of your final answer</li>
+                </ul>
+            </div>
+            
+            <button id="start-interview-btn" class="start-btn">Start Interview</button>
+        </div>
+        
+        <div id="interview-section" class="hidden">
+            <div class="progress-container">
+                <div class="progress-bar" id="progress"></div>
+            </div>
+            
+            <div id="interview-container" class="card fade-in">
+                <div class="timer" id="timer">00:00</div>
+                <div class="question-container">
+                    <div class="category" id="category">Category</div>
+                    <div class="question" id="question">Question will appear here</div>
+                </div>
+                
+                <textarea id="answer" placeholder="Type your answer here..."></textarea>
+                
+                <!-- Notes Feature -->
+                <div class="notes-container">
+                    <label for="notes" class="notes-label">Personal Notes (not part of your answer):</label>
+                    <textarea id="notes" class="notes-textarea" placeholder="Add any personal notes, reminders, or key points to remember..."></textarea>
+                </div>
+                
+                <div class="buttons">
+                    <div></div> <!-- Empty div to maintain spacing with flexbox -->
+                    <button id="next-btn" class="next-btn">Next</button>
+                    <button id="finish-btn" class="finish-btn hidden">Finish</button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="review-container" class="hidden">
+            <h2>Review Your Answers</h2>
+            <div class="review-container-wrapper">
+                <!-- Side Navigation for KSB Categories -->
+                <div class="ksb-nav" id="ksb-nav">
+                    <h3>Jump to KSB</h3>
+                    <ul id="ksb-list">
+                        <!-- Will be populated by JavaScript -->
+                    </ul>
+                </div>
+                
+                <div class="review-content">
+                    <div id="answers-review"></div>
+                    
+                    <div class="back-to-questions">
+                        <button id="start-over-btn" class="next-btn">Start New Session</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
