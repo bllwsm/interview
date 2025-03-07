@@ -392,6 +392,10 @@ button:focus {
     z-index: 1000;
 }
 
+.modal.hidden {
+    display: none !important; /* Ensure hidden overrides any inline styles */
+}
+
 .modal-content {
     background-color: white;
     padding: 2rem;
