@@ -425,3 +425,14 @@ button:focus {
     justify-content: flex-end;
     gap: 1rem;
 }
+
+/* Finish Test Button Style */
+.finish-test-btn {
+    background-color: var(--success-color);
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.finish-test-btn:hover {
+    background-color: #3ab7dc;
+}

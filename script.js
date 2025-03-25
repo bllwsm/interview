@@ -128,6 +128,7 @@ const answerEl = document.getElementById('answer');
 const notesEl = document.getElementById('notes');
 const nextBtn = document.getElementById('next-btn');
 const finishBtn = document.getElementById('finish-btn');
+const finishTestBtn = document.getElementById('finish-test-btn');
 const progressBar = document.getElementById('progress');
 const interviewContainer = document.getElementById('interview-container');
 const reviewContainer = document.getElementById('review-container');
@@ -179,6 +180,7 @@ function init() {
     startInterviewBtn.addEventListener('click', startInterview);
     nextBtn.addEventListener('click', goToNextQuestion);
     finishBtn.addEventListener('click', finishInterview);
+    finishTestBtn.addEventListener('click', showFinishConfirmation);
     startOverBtn.addEventListener('click', startOver);
     
     // Add new event listeners for leaving the test
@@ -429,6 +431,38 @@ function leaveTest() {
     
     // Save progress so user can continue later
     saveToLocalStorage();
+}
+
+// Show finish confirmation modal - new function
+function showFinishConfirmation() {
+    saveCurrentAnswer(); // Save the current answer before potentially finishing
+    
+    // Create and show a modal for confirmation
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.id = 'finish-confirm-modal';
+    
+    modal.innerHTML = `
+        <div class="modal-content">
+            <h3>Finish the test?</h3>
+            <p>You still have questions remaining. Are you sure you want to finish and see your review?</p>
+            <div class="modal-buttons">
+                <button id="cancel-finish-btn" class="secondary-btn">Cancel</button>
+                <button id="confirm-finish-btn" class="success-btn">Yes, Finish Test</button>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    document.getElementById('cancel-finish-btn').addEventListener('click', function() {
+        document.body.removeChild(modal);
+    });
+    
+    document.getElementById('confirm-finish-btn').addEventListener('click', function() {
+        document.body.removeChild(modal);
+        finishInterview();
+    });
 }
 
 // Save to localStorage
