@@ -4,93 +4,125 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio Interview Preparation</title>
-    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4361ee',
+                        secondary: '#3f37c9',
+                        light: '#f8f9fa',
+                        dark: '#212529',
+                        success: '#4cc9f0',
+                        warning: '#f72585'
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            'from': { opacity: '0', transform: 'translateY(20px)' },
+                            'to': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        modalFadeIn: {
+                            'from': { opacity: '0', transform: 'translateY(-20px)' },
+                            'to': { opacity: '1', transform: 'translateY(0)' }
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease forwards',
+                        'modal-fade-in': 'modalFadeIn 0.3s ease forwards'
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1>Portfolio Interview Preparation</h1>
+<body class="bg-gray-100 text-dark leading-relaxed font-sans">
+    <div class="max-w-3xl mx-auto px-8 py-8">
+        <header class="text-center mb-8 p-4 bg-white rounded-lg shadow-md">
+            <h1 class="text-primary text-2xl font-bold mb-2">Portfolio Interview Preparation</h1>
             <p>Practice answering interview questions to prepare for your portfolio discussion</p>
         </header>
         
         <!-- New Start Screen -->
-        <div id="start-screen" class="card start-screen fade-in">
-            <h2>Welcome to Your Interview Practice Session</h2>
-            <p>This tool will help you prepare for your portfolio discussion by presenting various interview questions related to different Knowledge, Skills and Behaviors (KSBs) required for the assessment.</p>
+        <div id="start-screen" class="bg-white rounded-lg shadow-md p-8 mb-8 text-center transform transition-transform duration-300 hover:-translate-y-1 animate-fade-in">
+            <h2 class="text-primary text-xl font-bold mb-6">Welcome to Your Interview Practice Session</h2>
+            <p class="mb-8 text-lg max-w-xl mx-auto">This tool will help you prepare for your portfolio discussion by presenting various interview questions related to different Knowledge, Skills and Behaviors (KSBs) required for the assessment.</p>
             
-            <div class="intro-points">
-                <h3>Before you begin:</h3>
-                <ul>
-                    <li>You will be presented with questions one at a time</li>
-                    <li>Take your time to provide thoughtful answers</li>
-                    <li>Once you move to the next question, you cannot go back</li>
-                    <li>At the end, you'll be able to review all your answers</li>
-                    <li>You can use the personal notes section for reminders that won't be part of your final answer</li>
+            <div class="bg-light rounded-lg p-6 my-6 text-left">
+                <h3 class="text-primary font-bold mb-4">Before you begin:</h3>
+                <ul class="pl-6 list-disc">
+                    <li class="mb-2">You will be presented with questions one at a time</li>
+                    <li class="mb-2">Take your time to provide thoughtful answers</li>
+                    <li class="mb-2">Once you move to the next question, you cannot go back</li>
+                    <li class="mb-2">At the end, you'll be able to review all your answers</li>
+                    <li class="mb-2">You can use the personal notes section for reminders that won't be part of your final answer</li>
                 </ul>
             </div>
             
-            <button id="start-interview-btn" class="start-btn">Start Interview</button>
+            <button id="start-interview-btn" class="bg-primary text-white px-6 py-3 rounded font-semibold hover:bg-secondary transition-colors duration-300 text-lg">Start Interview</button>
         </div>
         
         <div id="interview-section" class="hidden">
-            <div class="progress-container">
-                <div class="progress-bar" id="progress"></div>
+            <div class="w-full h-2 bg-gray-200 rounded overflow-hidden mb-8">
+                <div class="h-full bg-primary rounded transition-all duration-400 ease-in-out" id="progress"></div>
             </div>
             
-            <div id="interview-container" class="card fade-in">
-                <div class="timer" id="timer">00:00</div>
-                <div class="question-container">
-                    <div class="category" id="category">Category</div>
-                    <div class="question" id="question">Question will appear here</div>
+            <div id="interview-container" class="bg-white rounded-lg shadow-md p-8 mb-8 animate-fade-in">
+                <div id="timer" class="text-right mb-4 text-dark">00:00</div>
+                <div class="mb-6">
+                    <span id="category" class="inline-block bg-primary text-white px-3 py-1 rounded-full text-sm mb-4">Category</span>
+                    <div id="question" class="text-lg font-semibold mb-4 text-dark">Question will appear here</div>
                 </div>
                 
-                <textarea id="answer" placeholder="Type your answer here..."></textarea>
+                <textarea id="answer" placeholder="Type your answer here..." class="w-full min-h-[150px] p-4 border border-gray-300 rounded text-base mb-4 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/30 resize-y"></textarea>
                 
                 <!-- Notes Feature -->
-                <div class="notes-container">
-                    <label for="notes" class="notes-label">Personal Notes (not part of your answer):</label>
-                    <textarea id="notes" class="notes-textarea" placeholder="Add any personal notes, reminders, or key points to remember..."></textarea>
+                <div class="mt-4 mb-4 border-t border-gray-200 pt-4">
+                    <label for="notes" class="block mb-2 font-medium text-gray-600">Personal Notes (not part of your answer):</label>
+                    <textarea id="notes" placeholder="Add any personal notes, reminders, or key points to remember..." class="w-full min-h-[80px] p-3 border border-gray-300 rounded text-sm resize-y focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"></textarea>
                 </div>
                 
-                <div class="buttons">
-                    <button id="leave-test-btn" class="leave-btn">Leave Test</button>
-                    <button id="finish-test-btn" class="finish-test-btn">Finish Test</button>
-                    <button id="next-btn" class="next-btn">Next</button>
-                    <button id="finish-btn" class="finish-btn hidden">Finish</button>
+                <div class="flex justify-between mt-4">
+                    <button id="leave-test-btn" class="bg-gray-200 text-dark px-5 py-3 rounded font-semibold hover:bg-gray-300 hover:text-warning transition-colors duration-300">Leave Test</button>
+                    <div>
+                        <button id="finish-test-btn" class="bg-success text-white px-5 py-3 rounded font-semibold hover:bg-[#3ab7dc] transition-colors duration-300">Finish Test</button>
+                        <button id="next-btn" class="bg-primary text-white px-5 py-3 rounded font-semibold hover:bg-secondary transition-colors duration-300">Next</button>
+                        <button id="finish-btn" class="bg-primary text-white px-5 py-3 rounded font-semibold hover:bg-secondary transition-colors duration-300 hidden">Finish</button>
+                    </div>
                 </div>
             </div>
         </div>
         
         <div id="review-container" class="hidden">
-            <h2>Review Your Answers</h2>
-            <div class="review-container-wrapper">
+            <h2 class="text-2xl font-bold mb-6">Review Your Answers</h2>
+            <div class="flex flex-col lg:flex-row gap-5">
                 <!-- Side Navigation for KSB Categories -->
-                <div class="ksb-nav" id="ksb-nav">
-                    <h3>Jump to KSB</h3>
-                    <ul id="ksb-list">
+                <div class="lg:w-64 w-full bg-white rounded-lg shadow-md p-6 lg:sticky lg:top-5 lg:h-fit lg:max-h-[calc(100vh-40px)] overflow-y-auto">
+                    <h3 class="text-primary font-bold mb-4 text-lg">Jump to KSB</h3>
+                    <ul id="ksb-list" class="space-y-2">
                         <!-- Will be populated by JavaScript -->
                     </ul>
                 </div>
                 
-                <div class="review-content">
+                <div class="flex-1">
                     <div id="answers-review"></div>
                     
-                    <div class="back-to-questions">
-                        <button id="start-over-btn" class="next-btn">Start New Session</button>
+                    <div class="text-center mt-8">
+                        <button id="start-over-btn" class="bg-primary text-white px-5 py-3 rounded font-semibold hover:bg-secondary transition-colors duration-300">Start New Session</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal for confirmation - explicitly set to hidden -->
-    <div id="leave-confirm-modal" class="modal hidden" >
-        <div class="modal-content">
-            <h3>Leave the test?</h3>
-            <p>Your progress will be saved, and you can continue later. Are you sure you want to leave?</p>
-            <div class="modal-buttons">
-                <button id="cancel-leave-btn" class="secondary-btn">Cancel</button>
-                <button id="confirm-leave-btn" class="warning-btn">Yes, Leave Test</button>
+    <!-- Modal for confirmation -->
+    <div id="leave-confirm-modal" class="hidden fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+        <div class="bg-white p-8 rounded-lg max-w-md w-11/12 shadow-xl animate-modal-fade-in">
+            <h3 class="text-xl font-bold mb-4">Leave the test?</h3>
+            <p class="mb-6">Your progress will be saved, and you can continue later. Are you sure you want to leave?</p>
+            <div class="flex justify-end gap-4">
+                <button id="cancel-leave-btn" class="bg-gray-200 text-dark px-4 py-2 rounded font-semibold hover:bg-gray-300 transition-colors duration-300">Cancel</button>
+                <button id="confirm-leave-btn" class="bg-warning text-white px-4 py-2 rounded font-semibold hover:bg-[#d61e72] transition-colors duration-300">Yes, Leave Test</button>
             </div>
         </div>
     </div>

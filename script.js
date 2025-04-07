@@ -225,7 +225,7 @@ function generateKsbList() {
     let ksbListHTML = '';
     categories.forEach(category => {
         const catId = category.replace(/\s+/g, '-').toLowerCase();
-        ksbListHTML += `<li><a href="#${catId}" data-category="${category}">${category}</a></li>`;
+        ksbListHTML += `<li><a href="#${catId}" class="block p-2 rounded text-dark hover:bg-gray-100 hover:text-primary transition-colors duration-200" data-category="${category}">${category}</a></li>`;
     });
     
     ksbListEl.innerHTML = ksbListHTML;
@@ -236,10 +236,10 @@ function generateKsbList() {
             e.preventDefault();
             
             // Remove active class from all links
-            document.querySelectorAll('#ksb-list a').forEach(l => l.classList.remove('active'));
+            document.querySelectorAll('#ksb-list a').forEach(l => l.classList.remove('bg-gray-100', 'text-primary'));
             
             // Add active class to clicked link
-            this.classList.add('active');
+            this.classList.add('bg-gray-100', 'text-primary');
             
             const category = this.getAttribute('data-category');
             scrollToCategory(category);
@@ -332,7 +332,7 @@ function finishInterview() {
         
         // Add category header
         reviewHTML += `<div id="${catId}" class="category-section">
-            <h3 style="color: var(--primary-color); margin-top: 2rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #eee;">${category}</h3>
+            <h3 class="text-primary text-xl font-bold mt-8 mb-4 pb-2 border-b-2 border-gray-100">${category}</h3>
         </div>`;
         
         // Add questions for this category
@@ -342,16 +342,16 @@ function finishInterview() {
                 const note = notes[index] || '';
                 
                 reviewHTML += `
-                    <div class="review-card fade-in">
-                        <div class="category">${q.category}</div>
-                        <div class="question"><strong>Q${index + 1}:</strong> ${q.question}</div>
-                        <div class="review-answer ${answer ? '' : 'empty-answer'}">
+                    <div class="bg-white rounded-lg shadow-md p-6 mb-8 border-l-4 border-primary animate-fade-in">
+                        <span class="inline-block bg-primary text-white px-3 py-1 rounded-full text-sm mb-4">${q.category}</span>
+                        <div class="text-lg font-semibold mb-4"><strong>Q${index + 1}:</strong> ${q.question}</div>
+                        <div class="bg-light p-4 rounded whitespace-pre-wrap ${answer ? '' : 'text-red-500 italic'}">
                             ${answer || 'No answer provided'}
                         </div>
                         ${note ? `
-                        <div style="margin-top: 10px; border-top: 1px dashed #ddd; padding-top: 10px;">
+                        <div class="mt-4 border-t border-dashed border-gray-300 pt-3">
                             <strong>Your Notes:</strong>
-                            <div style="background-color: #f8f9fa; padding: 8px; border-radius: 5px; margin-top: 5px; font-style: italic;">
+                            <div class="bg-light p-2 rounded mt-2 italic">
                                 ${note}
                             </div>
                         </div>
@@ -367,7 +367,7 @@ function finishInterview() {
     // Activate the first KSB in the navigation
     const firstKsbLink = document.querySelector('#ksb-list a');
     if (firstKsbLink) {
-        firstKsbLink.classList.add('active');
+        firstKsbLink.classList.add('bg-gray-100', 'text-primary');
     }
 }
 
@@ -439,16 +439,16 @@ function showFinishConfirmation() {
     
     // Create and show a modal for confirmation
     const modal = document.createElement('div');
-    modal.className = 'modal';
+    modal.className = 'fixed inset-0 flex items-center justify-center bg-black/50 z-50';
     modal.id = 'finish-confirm-modal';
     
     modal.innerHTML = `
-        <div class="modal-content">
-            <h3>Finish the test?</h3>
-            <p>You still have questions remaining. Are you sure you want to finish and see your review?</p>
-            <div class="modal-buttons">
-                <button id="cancel-finish-btn" class="secondary-btn">Cancel</button>
-                <button id="confirm-finish-btn" class="success-btn">Yes, Finish Test</button>
+        <div class="bg-white p-8 rounded-lg max-w-md w-11/12 shadow-xl animate-modal-fade-in">
+            <h3 class="text-xl font-bold mb-4">Finish the test?</h3>
+            <p class="mb-6">You still have questions remaining. Are you sure you want to finish and see your review?</p>
+            <div class="flex justify-end gap-4">
+                <button id="cancel-finish-btn" class="bg-gray-200 text-dark px-4 py-2 rounded font-semibold hover:bg-gray-300 transition-colors duration-300">Cancel</button>
+                <button id="confirm-finish-btn" class="bg-success text-white px-4 py-2 rounded font-semibold hover:bg-[#3ab7dc] transition-colors duration-300">Yes, Finish Test</button>
             </div>
         </div>
     `;
